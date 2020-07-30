@@ -4,4 +4,5 @@ from django.shortcuts import render
 # Create your views here.
 def index(request):
     text="merhaba world"
-    return HttpResponse("deneme sayfasi %s."%text)
+    context = {'test': text}
+    return render(request, 'index.html', context)
