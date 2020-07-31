@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{% block description %}home des {% endblock %}">
-    <meta name="keywords" content="{% block keywords %} home keyw{% endblock %}">
+    <meta name="keywords" content="{% block keywords %}home des {% endblock %}">
     <meta name="author" content="">
     <title> {% block title %} {% endblock %} </title>
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
@@ -20,10 +20,14 @@
     <script src="{% static 'js/respond.min.js' %}"></script>
     <![endif]-->
     <link rel="shortcut icon" href="{% static 'images/ico/favicon.ico' %}">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static 'images/ico/apple-touch-icon-144-precomposed.png' %}">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'images/ico/apple-touch-icon-114-precomposed.png' %}">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{% static 'images/ico/apple-touch-icon-72-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144"
+          href="{% static 'images/ico/apple-touch-icon-144-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114"
+          href="{% static 'images/ico/apple-touch-icon-114-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72"
+          href="{% static 'images/ico/apple-touch-icon-72-precomposed.png' %}">
     <link rel="apple-touch-icon-precomposed" href="{% static 'images/ico/apple-touch-icon-57-precomposed.png' %}">
+    {% block head %} {% endblock %}
 </head>
 <body>
 {% include "header.html" %}
@@ -37,6 +41,7 @@
             {% block body %} {% endblock %}
 
             {% include "footer.html" %}
+            {% block foot %} {% endblock %}
         </div>
     </div>
 </section>
