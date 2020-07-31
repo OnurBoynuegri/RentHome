@@ -1,3 +1,4 @@
+from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
 
 
@@ -65,7 +66,7 @@ class House(models.Model):
     heating = models.CharField(max_length=30, choices=HEATING, blank=True)
     stuff = models.CharField(max_length=30, choices=STUFF, blank=True)
     status = models.CharField(max_length=30, choices=STATUS)
-    detail = models.TextField(blank=True)
+    detail = RichTextUploadingField(blank=True)
     parent = models.ForeignKey('self', blank=True, null=True, related_name='children', on_delete=models.CASCADE)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
