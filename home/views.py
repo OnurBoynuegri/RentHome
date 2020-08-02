@@ -4,26 +4,32 @@ from django.shortcuts import render
 
 # Create your views here.
 from home.models import Setting, ContactFormu, ContactFormMessage
-from house.models import House
+from house.models import House, Category
 
 
 def index(request):
     setting = Setting.objects.get(pk=1)
     sliderdata = House.objects.all()[:4]
+    category = Category.objects.all()
     context = {'setting': setting,
-               'sliderdata': sliderdata}
+               'sliderdata': sliderdata,
+               'category': category}
     return render(request, 'index.html', context)
 
 
 def hakkimizda(request):
     setting = Setting.objects.get(pk=1)
-    context = {'setting': setting}
+    category = Category.objects.all()
+    context = {'setting': setting,
+               'category': category}
     return render(request, 'hakkimizda.html', context)
 
 
 def referanslar(request):
     setting = Setting.objects.get(pk=1)
-    context = {'setting': setting}
+    category = Category.objects.all()
+    context = {'setting': setting,
+               'category': category}
     return render(request, 'referanslar.html', context)
 
 
@@ -43,5 +49,8 @@ def iletisim(request):
 
     setting = Setting.objects.get(pk=1)
     form = ContactFormu()
-    context = {'setting': setting, 'form': form}
+    category = Category.objects.all()
+    context = {'setting': setting,
+               'form': form,
+               'category': category}
     return render(request, 'iletisim.html', context)
