@@ -1,7 +1,6 @@
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.db import models
 
-
 # Create your models here.
 from django.utils.safestring import mark_safe
 
@@ -25,8 +24,13 @@ class Category(models.Model):
         return self.title
 
     def image_tag(self):
-        return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
+        if self.image:
+            return mark_safe('<img src="%s" style="width: 45px; height:45px;" />' % self.image.url)
+        else:
+            return 'No Image Found'
+
     image_tag.short_description = 'Image'
+
 
 class House(models.Model):
     STATUS = (
@@ -67,6 +71,7 @@ class House(models.Model):
     stuff = models.CharField(max_length=30, choices=STUFF, blank=True)
     status = models.CharField(max_length=30, choices=STATUS)
     detail = RichTextUploadingField(blank=True)
+    slug = models.SlugField(blank=True,max_length=255)
     parent = models.ForeignKey('self', blank=True, null=True, related_name='children', on_delete=models.CASCADE)
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
@@ -75,7 +80,11 @@ class House(models.Model):
         return self.title
 
     def image_tag(self):
-        return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
+        if self.image:
+            return mark_safe('<img src="%s" style="width: 45px; height:45px;" />' % self.image.url)
+        else:
+            return 'No Image Found'
+
     image_tag.short_description = 'Image'
 
 
@@ -88,5 +97,9 @@ class Images(models.Model):
         return self.title
 
     def image_tag(self):
-        return mark_safe('<img src="{}" height="50"/>'.format(self.image.url))
+        if self.image:
+            return mark_safe('<img src="%s" style="width: 45px; height:45px;" />' % self.image.url)
+        else:
+            return 'No Image Found'
+
     image_tag.short_description = 'Image'

@@ -3,12 +3,15 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 # Create your views here.
-from home.models import Setting, ContactFormu,ContactFormMessage
+from home.models import Setting, ContactFormu, ContactFormMessage
+from house.models import House
 
 
 def index(request):
     setting = Setting.objects.get(pk=1)
-    context = {'setting': setting}
+    sliderdata = House.objects.all()[:4]
+    context = {'setting': setting,
+               'sliderdata': sliderdata}
     return render(request, 'index.html', context)
 
 
@@ -33,12 +36,12 @@ def iletisim(request):
             data.email = form.cleaned_data['email']
             data.subject = form.cleaned_data['subject']
             data.message = form.cleaned_data['message']
-            data.ip=request.META.get('REMOTE_ADDR')
+            data.ip = request.META.get('REMOTE_ADDR')
             data.save()
             messages.success(request, "Mesasjınız başarılı bir şekilde gönderildi. Teşekkürler")
             return HttpResponseRedirect('/iletisim')
 
     setting = Setting.objects.get(pk=1)
-    form=ContactFormu()
-    context = {'setting': setting,'form':form}
+    form = ContactFormu()
+    context = {'setting': setting, 'form': form}
     return render(request, 'iletisim.html', context)
