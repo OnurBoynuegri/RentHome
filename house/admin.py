@@ -18,7 +18,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 class HouseAdmin(admin.ModelAdmin):
-    list_display = ['title', 'category', 'image_tag', 'price', 'room']
+    list_display = ['title', 'category', 'image_tag', 'price', 'room','slug']
     list_filter = ['status']
     inlines = [HouseImageInline]
     readonly_fields = ('image_tag',)
@@ -32,7 +32,7 @@ class ImagesAdmin(admin.ModelAdmin):
 class CategoryAdmin2(DraggableMPTTAdmin):
     mptt_indent_field = "title"
     list_display = ('tree_actions', 'indented_title',
-                    'related_products_count', 'related_products_cumulative_count')
+                    'related_products_count', 'related_products_cumulative_count','slug')
     list_display_links = ('indented_title',)
     prepopulated_fields = {'slug': ('title',)}
 

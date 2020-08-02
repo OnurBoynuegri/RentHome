@@ -54,3 +54,14 @@ def iletisim(request):
                'form': form,
                'category': category}
     return render(request, 'iletisim.html', context)
+
+def category_houses(request, id, slug):
+    category = Category.objects.all()
+    categorydata = Category.objects.get(pk=id)
+    house = House.objects.filter(category_id=id)
+    context = {'house': house,
+               'category': category,
+               'categorydata': categorydata}
+    return render(request, 'houses.html', context)
+
+    image_tag.short_description = 'Image'
