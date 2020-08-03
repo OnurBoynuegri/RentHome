@@ -1,0 +1,122 @@
+{% extends "homebase.html" %}
+{% block title %}{{ house.title }}{% endblock %}
+{% block description %}{{ house.description }}{% endblock %}
+{% block keywords %} {{ house.keywords }}{% endblock %}
+{% block head %}
+    <link rel="shortcut icon" type="image/x-icon" href='{{ setting.icon.url }}'>
+{% endblock %}
+
+{% block sidebar %}
+    {% include "sidebar.html" %}
+{% endblock %}
+{% block slider %}
+{% endblock %}
+{% block body %}
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-9 padding-right">
+
+
+                    <div class="product-details"><!--product-details-->
+
+                        <div class="col-sm-8">
+                            <div id="slider-carousel" class="carousel slide" data-ride="carousel">
+                                <ol class="carousel-indicators">
+                                    <li data-target="#slider-carousel" data-slide-to="0" class=""></li>
+                                    <li data-target="#slider-carousel" data-slide-to="1" class=""></li>
+                                    <li data-target="#slider-carousel" data-slide-to="2" class=""></li>
+                                </ol>
+
+                                <div class="carousel-inner">
+                                    <div class="item active">
+                                        <div class="col-sm-12">
+                                            <img src="{{ house.image.url }}" style="width:600px; height:400px"
+                                                 class="girl img-responsive" alt="">
+                                        </div>
+                                    </div>
+                                    {% for rs in images %}
+                                        <div class="item">
+                                            <div class="col-sm-12">
+                                                <img src="{{ rs.image.url }}" style="width:600px; height:400px"
+                                                     class="girl img-responsive" alt="">
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+
+                                <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+                                    <i class="fa fa-angle-left"></i>
+                                </a>
+                                <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+                                    <i class="fa fa-angle-right"></i>
+                                </a>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="product-information"><!--/product-information-->
+                                <h2>Price:{{ house.price }}</h2>
+                                <h2>{{ house.address }}</h2>
+                                <p><b>Room:</b> {{ house.room }}</p>
+                                <p><b>Balkon:</b> {{ house.balcony }}</p>
+                                <p><b>ısıtma:</b> {{ house.heating }}</p>
+                                <p><b>Eşyalı:</b> {{ house.stuff }}</p>
+                            </div><!--/product-information-->
+                        </div>
+
+                    </div><!--/product-details-->
+                    <div class="category-tab shop-details-tab"><!--category-tab-->
+                        <div class="col-sm-12">
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="#details" data-toggle="tab">Details</a></li>
+                                <li><a href="#reviews" data-toggle="tab">Reviews (5)</a></li>
+                            </ul>
+                        </div>
+
+
+                        <div class="tab-content">
+                            <div class="tab-pane fade active in" id="details">
+                                <div class="product-information"><!--/product-information-->
+                                    <p>{{ house.detail|safe }}</p>
+                                </div><!--/product-information-->
+                            </div>
+
+
+                            <div class="tab-pane fade" id="reviews">
+                                <div class="col-sm-12">
+                                    <ul>
+                                        <li><a href=""><i class="fa fa-user"></i>EUGEN</a></li>
+                                        <li><a href=""><i class="fa fa-clock-o"></i>12:41 PM</a></li>
+                                        <li><a href=""><i class="fa fa-calendar-o"></i>31 DEC 2014</a></li>
+                                    </ul>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
+                                        incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis
+                                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+                                        consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum
+                                        dolore eu fugiat nulla pariatur.</p>
+                                    <p><b>Write Your Review</b></p>
+
+                                    <form action="#">
+										<span>
+											<input type="text" placeholder="Your Name">
+											<input type="email" placeholder="Email Address">
+										</span>
+                                        <textarea name=""></textarea>
+                                        <b>Rating: </b> <img src="images/product-details/rating.png" alt="">
+                                        <button type="button" class="btn btn-default pull-right">
+                                            Submit
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div><!--/category-tab-->
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
