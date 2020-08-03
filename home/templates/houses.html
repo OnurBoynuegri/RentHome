@@ -18,15 +18,17 @@
                 <div class="col-sm-9 padding-right">
                     <div class="features_items"><!--features_items-->
                         <h2 class="title text-center">{{ categorydata.title}}</h2>
-                    
+
                         {% for rs in house %}
                             <div class="col-sm-4">
                                 <div class="product-image-wrapper">
                                     <div class="single-products">
                                         <div class="productinfo text-center">
-                                            <img src="{{ rs.image.url }}" alt="">
+                                            <img src="{{ rs.image.url }}" style="width: 300px; height: 200px; align-content: center" alt="">
                                             <h2>{{ rs.price }}TL</h2>
                                             <p>{{ rs.title }}</p>
+                                            <a href="/house/{{ rs.id }}/{{ rs.slug }}"
+                                           class="btn btn-default add-to-cart">Detaylar</a>
                                         </div>
 
                                     </div>

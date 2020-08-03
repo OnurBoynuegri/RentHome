@@ -11,9 +11,16 @@ def index(request):
     setting = Setting.objects.get(pk=1)
     sliderdata = House.objects.all()[:4]
     category = Category.objects.all()
+    randhouse = House.objects.all().order_by('?')
+    lasthouseFirst = House.objects.all().order_by('-id')[:3]
+    lasthouseSecond = House.objects.all().order_by('-id')[3:6]
     context = {'setting': setting,
                'sliderdata': sliderdata,
-               'category': category}
+               'category': category,
+               'randhouse': randhouse,
+               'lasthouseFirst': lasthouseFirst,
+               'lasthouseSecond': lasthouseSecond,
+               }
     return render(request, 'index.html', context)
 
 
@@ -54,6 +61,7 @@ def iletisim(request):
                'form': form,
                'category': category}
     return render(request, 'iletisim.html', context)
+
 
 def category_houses(request, id, slug):
     category = Category.objects.all()
