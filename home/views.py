@@ -5,6 +5,7 @@ from django.shortcuts import render
 # Create your views here.
 from home.models import Setting, ContactFormu, ContactFormMessage
 from house.models import House, Category, Images
+from home.forms import SearchForm
 
 
 def index(request):
@@ -84,3 +85,17 @@ def house_detail(request, id, slug):
                'images': images,
                }
     return render(request, 'house_detail.html', context)
+
+
+def house_search(request):
+    if request.method == 'POST':
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            category = Category.objects.all()
+            query = form.cleaned_data['query']
+            houses = House.objects.filter(title__icontains=query)
+
+            context = {'houses': houses,
+                       'category': category}
+            return render(request, 'house_search.html', context)
+    return HttpResponseRedirect('/')

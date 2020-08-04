@@ -1,0 +1,52 @@
+{% extends "homebase.html" %}
+{% block title %}Research Results{% endblock %}
+{% block description %}{{ setting.description }}{% endblock %}
+{% block keywords %} {{ setting.keywords }}{% endblock %}
+{% block head %}
+    <link rel="shortcut icon" type="image/x-icon" href='{{ setting.icon.url }}'>
+{% endblock %}
+
+{% block sidebar %}
+{% endblock %}
+{% block slider %}
+{% endblock %}
+{% block body %}
+    <section id="cart_items">
+        <div class="container">
+            <div class="table-responsive cart_info">
+                <table class="table table-condensed">
+                    <thead>
+                    <tr class="cart_menu">
+                        <td class="image">Image</td>
+                        <td class="description">Address</td>
+                        <td class="price">Category</td>
+                        <td class="total">Total</td>
+                        <td></td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for rs in houses %}
+                        <tr>
+                            <td class="cart_product">
+                                <a href="/house/{{ rs.id }}/{{ rs.slug }}"><img src="{{ rs.image.url }}"
+                                                                               style="width: 210px;height: 110px;"
+                                                                               alt=""></a>
+                            </td>
+                            <td >
+                                <h4><a href="/house/{{ rs.id }}/{{ rs.slug }}">{{ rs.title}}</a></h4>
+                                <p>Address: {{ rs.address}}</p>
+                            </td>
+                            <td>
+                                <a href="/category/{{ rs.category.id }}/{{ rs.category.slug }}">{{ rs.category}}</a>
+                            </td>
+                            <td class="cart_total">
+                                <p class="cart_total_price">{{ rs.price }}</p>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+{% endblock %}
