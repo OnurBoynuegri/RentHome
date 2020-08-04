@@ -27,10 +27,11 @@ urlpatterns = [
     path('house/', include('house.urls')),
     path('home/', include('home.urls')),
     path('admin/', admin.site.urls),
-    path('^ckeditor/', include('ckeditor_uploader.urls')),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
     path('category/<int:id>/<slug:slug>/', views.category_houses, name='category_houses'),
     path('house/<int:id>/<slug:slug>/', views.house_detail, name='house_detail'),
     path('search/', views.house_search, name='house_search'),
+    path('search_auto/', views.house_search_auto, name='house_search_auto'),
 ]
 if settings.DEBUG:  # new
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

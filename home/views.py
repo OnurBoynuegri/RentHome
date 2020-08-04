@@ -1,3 +1,5 @@
+import json
+
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
@@ -92,10 +94,29 @@ def house_search(request):
         form = SearchForm(request.POST)
         if form.is_valid():
             category = Category.objects.all()
-            query = form.cleaned_data['query']
-            houses = House.objects.filter(title__icontains=query)
-
+            query = form.data['query']
+            catid = form.data['catname']
+            if catid == 0:
+                houses = House.objects.filter(title__icontains=query)
+            else:
+                houses = House.objects.filter(title__icontains=query, category_id=catid)
             context = {'houses': houses,
                        'category': category}
             return render(request, 'house_search.html', context)
     return HttpResponseRedirect('/')
+
+
+def house_search_auto(request):
+    if request.is_ajax():
+        q = request.GET.get('term', '')
+        house = House.objects.filter(title__icontains=q)
+        results = []
+        for rs in house:
+            house_json = {}
+            house_json = rs.title
+            results.append(house_json)
+        data = json.dumps(results)
+    else:
+        data = 'fail'
+    mimetype = 'application/json'
+    return HttpResponse(data, mimetype)
