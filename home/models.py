@@ -1,9 +1,12 @@
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.contrib.auth.models import User
 from django.db import models
 from django.forms import ModelForm, TextInput, Textarea
 
-
 # Create your models here.
+from django.utils.safestring import mark_safe
+
+
 class Setting(models.Model):
     STATUS = (
         ('True', 'Evet'),
@@ -66,3 +69,32 @@ class ContactFormu(ModelForm):
             'email': TextInput(attrs={'class': 'form-control', 'placeholder': 'Email Address'}),
             'message': Textarea(attrs={'class': 'form-control', 'placeholder': 'Your Message', 'rows': '5'}),
         }
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    phone = models.CharField(blank=True, max_length=20)
+    adress = models.CharField(blank=True, max_length=120)
+    city = models.CharField(blank=True, max_length=20)
+    country = models.CharField(blank=True, max_length=20)
+    image = models.ImageField(blank=True, upload_to='images/users/')
+
+    def __str__(self):
+        return self.user.username
+
+    def user_name(self):
+        return self.user.first_name + ' ' + self.user.last_name + ' [' + self.user.username + ']'
+
+    def image_tag(self):
+        if self.image:
+            return mark_safe('<img src="%s" style="width: 45px; height:45px;" />' % self.image.url)
+        else:
+            return 'No Image Found'
+
+    image_tag.short_description = 'Image'
+
+
+class UserProfileForm(ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['phone', 'adress', 'city', 'country', 'image']
