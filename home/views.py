@@ -8,7 +8,7 @@ from django.shortcuts import render
 # Create your views here.
 from home.models import Setting, ContactFormu, ContactFormMessage
 from house.models import House, Category, Images
-from home.forms import SearchForm
+from home.forms import SearchForm, SignUpForm
 
 
 def index(request):
@@ -95,8 +95,8 @@ def house_search(request):
         form = SearchForm(request.POST)
         if form.is_valid():
             category = Category.objects.all()
-            query = form.data['query']
-            catid = form.data['catname']
+            query = form.cleaned_data['query']
+            catid = form.cleaned_data['catid']
             if catid == 0:
                 houses = House.objects.filter(title__icontains=query)
             else:
@@ -127,6 +127,7 @@ def logout_view(request):
     logout(request)
     return HttpResponseRedirect('/')
 
+
 def login_view(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -140,7 +141,26 @@ def login_view(request):
             messages.error(request, "Login Hatası!")
             return HttpResponseRedirect('/login')
 
-
     category = Category.objects.all()
     context = {'category': category}
     return render(request, 'login.html', context)
+
+
+def signup_view(request):
+    if request.method == 'POST':
+        form = SignUpForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password1']
+            user = authenticate(username=username, password=password)
+            login(request, user)
+            return HttpResponseRedirect('/')
+
+    form = SignUpForm()
+    category = Category.objects.all()
+    context = {'category': category,
+               'form': form,
+               }
+    return render(request, 'signup.html', context)

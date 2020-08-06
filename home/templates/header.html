@@ -47,7 +47,7 @@
                                 <li><a href="#"><i class="fa fa-user"></i> {{ user.first_name }}</a></li>
                             {% else %}
                                 <li><a href="/login/"><i class="fa fa-lock"></i> Login</a></li>
-                                <li><a href="/signin/"><i class="fa fa-sign-in"></i> Sign In</a></li>
+                                <li><a href="/signup/"><i class="fa fa-sign-in"></i> Sign Up</a></li>
                             {% endif %}
                             <li><a href="/logout/"><i class="fa fa-sign-out"></i> Logout</a></li>
                         </ul>
@@ -58,9 +58,10 @@
     </div><!--/header-middle-->
 
     <script>
+
         $(function () {
             $("#query").autocomplete({
-                source: "search_auto/",
+                source: "/search_auto/",
                 select: function (event, ui) { //item selected
                     AutoCompleteSelectHandler(event, ui)
                 },
@@ -71,6 +72,7 @@
         function AutoCompleteSelectHandler(event, ui) {
             var selectedObj = ui.item;
         }
+
     </script>
 
     <div class="header-bottom"><!--header-bottom-->
@@ -97,14 +99,14 @@
                 </div>
 
                 <div class="col-sm-5">
-                    <div class="single-widget">
+                    <div class="ui-widget">
 
                         <form action="/search/" method="post" class="searchform">
                             {% csrf_token %}
                             <input id="query" name="query" type="text" placeholder="Search">
                             {% load mptt_tags %}
 
-                            <select id="catid" name="catname" style="width: 120px;height: 37px;margin-right: 10px;">
+                            <select name="catid" style="width: 120px;height: 37px;margin-right: 10px;">
                                 <option value="0">All Categories</option>
                                 {% recursetree category %}
                                     {% if  node.is_leaf_node %}
