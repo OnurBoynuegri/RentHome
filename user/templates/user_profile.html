@@ -1,0 +1,67 @@
+{% extends "homebase.html" %}
+{% block title %}{{ setting.company }}{% endblock %}
+{% block description %}{{ setting.description }}{% endblock %}
+{% block keywords %} {{ setting.keywords }}{% endblock %}
+{% block head %}
+    <link rel="shortcut icon" type="image/x-icon" href='{{ setting.icon.url }}'>
+{% endblock %}
+
+{% block sidebar %}
+{% endblock %}
+{% block slider %}
+{% endblock %}
+{% block body %}
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="left-sidebar">
+                        <div class="brands_products"><!--brands_products-->
+                            <h2>User Panel</h2>
+                            {% include "user_panel.html" %}
+                        </div><!--/brands_products-->
+                    </div>
+                </div>
+                <section id="cart_items">
+                    <div class="col-sm-9 padding-right">
+                        <div class="product-details"><!--product-details-->
+                            <div class="table-responsive cart_info">
+                                <table class="table table-condensed">
+                                    <tr class="cart_menu">
+                                        <td class="image"></td>
+                                        <td class="cart_description"><img src="{{ profile.image.url }}"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="image">Name Surname</td>
+                                        <td class="cart_description">{{ profile.user_name }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="description">Email</td>
+                                        <td class="cart_description">{{ profile.user.email }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="price">Phone</td>
+                                        <td class="cart_description">{{ profile.phone }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="quantity">Address</td>
+                                        <td class="cart_description">{{ profile.adress }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="total">City</td>
+                                        <td class="cart_description">{{ profile.city }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Country</td>
+                                        <td class="cart_description">{{ profile.country }}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div><!--/product-details-->
+
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+{% endblock %}
