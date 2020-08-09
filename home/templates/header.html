@@ -44,7 +44,6 @@
                     <div class="shop-menu pull-right">
                         <ul class="nav navbar-nav">
                             {% if user.id is not None %}
-                                <li><a href="#"><img src="{{ request.user.profile.image.url}}" alt=""></a></li>
                                 <li><a href="/user/"><i class="fa fa-user"></i> {{ user.username }}</a></li>
                                 <li><a href="/logout/"><i class="fa fa-sign-out"></i> Logout</a></li>
                             {% else %}

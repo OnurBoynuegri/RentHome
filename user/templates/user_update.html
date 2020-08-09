@@ -1,0 +1,59 @@
+{% extends "homebase.html" %}
+{% block title %}{{ setting.company }}{% endblock %}
+{% block description %}{{ setting.description }}{% endblock %}
+{% block keywords %} {{ setting.keywords }}{% endblock %}
+{% block head %}
+    <link rel="shortcut icon" type="image/x-icon" href='{{ setting.icon.url }}'>
+{% endblock %}
+
+{% block sidebar %}
+{% endblock %}
+{% block slider %}
+{% endblock %}
+{% block body %}
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="left-sidebar">
+                        <div class="brands_products"><!--brands_products-->
+                            <h2>User Panel</h2>
+                            {% include "user_panel.html" %}
+                        </div><!--/brands_products-->
+                    </div>
+                </div>
+                <section id="cart_items">
+                    <div class="col-sm-9 padding-right">
+                        <div class="product-details"><!--product-details-->
+                            <div class="col-sm-3">
+                                <div class="view-product">
+                                    <img src="{{ user.userprofile.image.url }}" style="width: 180px;height: 200px;">
+                                </div>
+
+                            </div>
+                            <div class="col-sm-9">
+
+                            </div>
+                        </div>
+
+                        <div class="product-details"><!--product-details-->
+                            <form method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <fieldset class="form-group">
+                                    {{ user_form.as_p }}
+                                    {{ profile_form.as_p }}
+                                </fieldset>
+                                <div class="form-group" style="text-align: center;">
+                                    <button class="btn btn-lg btn-primary"
+                                            style="font-size: 14px;text-align: center;" type="submit">Güncelle
+                                    </button>
+                                </div>
+                            </form>
+                        </div><!--/product-details-->
+
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+{% endblock %}

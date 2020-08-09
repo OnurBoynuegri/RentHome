@@ -156,11 +156,13 @@ def signup_view(request):
             password = form.cleaned_data['password1']
             user = authenticate(username=username, password=password)
             login(request, user)
-            current_user=request.user
-            data=UserProfile()
-            data.user_id=current_user.id
-            data.image="images/users/user.png"
+
+            current_user = request.user
+            data = UserProfile()
+            data.user_id = current_user.id
+            data.image = "images/users/user.png"
             data.save()
+
             return HttpResponseRedirect('/')
 
     form = SignUpForm()
